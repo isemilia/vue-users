@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <Table :rows="userInfo.rows" :headers="headers"/>
+    <Table :rows="userInfo.rows" :headers="headers" :hasFooter="true" @page-change="handlePageChange"/>
   </div>
 </template>
 
@@ -16,6 +16,10 @@
     isError: boolean;
     isSuccess: boolean;
   }>({ rows: [], isLoading: true, isSuccess: false, isError: false })
+
+  const handlePageChange = (page: number) => {
+    console.log(page)
+  }
 
   const fetchUsers = () => {
     userInfo.value.isLoading = true;
