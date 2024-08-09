@@ -64,10 +64,15 @@ import {ref, VNode, watch} from "vue";
 </script>
 
 <style scoped>
+  .table-container {
+    max-height: 100%;
+  }
   .table-root {
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
+    height: 100%;
+    overflow: auto;
   }
   th {
     text-align: left;

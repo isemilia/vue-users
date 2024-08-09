@@ -69,9 +69,11 @@
 
 <style scoped lang="scss">
   .main {
-    height: 100%;
     width: 100%;
     max-width: 700px;
     margin: 0 auto;
+    display: grid;
+    place-content: center;
+    height: 100vh;
   }
 </style>
