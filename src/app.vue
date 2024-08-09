@@ -4,15 +4,16 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-  import Table from "./components/table/table.vue";
+<script lang="tsx" setup>
+  import Table from "./components/table/base-table.vue";
 
   const users = [
     {id: 1, name: 'Anna', email: 'anna@gmail.com' }
   ]
 
   const headers = [
-    {name: 'name', label: <h2>First name<h2/>}
+    {name: 'name', label: 'Client'},
+    {name: 'email', label: 'Email'},
   ]
 </script>
 
