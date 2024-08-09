@@ -1,15 +1,50 @@
 <template>
   <div class="main">
-    <Table :rows="users" :headers="headers"/>
+    <Table :rows="userInfo.rows" :headers="headers"/>
   </div>
 </template>
 
 <script lang="tsx" setup>
   import Table from "./components/table/base-table.vue";
+  import {onMounted, ref} from "vue";
 
-  const users = [
-    {id: 1, name: 'Anna', email: 'anna@gmail.com' }
-  ]
+  const url = 'https://dummyjson.com/users/?limit=15&skip=0';
+
+  const userInfo = ref<{
+    rows: any[];
+    isLoading: boolean;
+    isError: boolean;
+    isSuccess: boolean;
+  }>({ rows: [], isLoading: true, isSuccess: false, isError: false })
+
+  const fetchUsers = () => {
+    userInfo.value.isLoading = true;
+
+    fetch(url)
+        .then((response) => {
+          return response.json()
+        })
+        .then((data) => {
+          // console.log(data)
+          userInfo.value.rows = data.users.map(user => ({
+            id: user.id,
+            name: user.firstName,
+            email: user.email,
+          }))
+          userInfo.value.isSuccess = true
+        })
+        .catch(() => {
+          userInfo.value.isError = true;
+          userInfo.value.isSuccess = false;
+        })
+        .finally(() => {
+          userInfo.value.isLoading = false;
+        })
+  }
+
+  onMounted(() => {
+    fetchUsers()
+  })
 
   const headers = [
     {name: 'name', label: 'Client'},
