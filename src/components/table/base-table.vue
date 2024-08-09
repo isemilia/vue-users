@@ -21,7 +21,7 @@
     <div v-if="hasFooter" class="table-footer">
       <div>Page {{page + 1}}</div>
       <div class="table-pagination">
-        <button @click="decreasePage"> < </button>
+        <button :disabled="page === 0" @click="decreasePage"> < </button>
         <button @click="increasePage"> > </button>
       </div>
     </div>
