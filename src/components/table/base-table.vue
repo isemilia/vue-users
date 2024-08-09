@@ -31,9 +31,6 @@
     }[]
   }>()
 
-  console.log(props.rows)
-  console.log(props.headers)
-
 </script>
 
 <style scoped>
