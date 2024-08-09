@@ -6,9 +6,10 @@
 
 <script lang="tsx" setup>
   import Table from "./components/table/base-table.vue";
-  import {onMounted, ref} from "vue";
+  import {onMounted, ref, watch} from "vue";
 
-  const url = 'https://dummyjson.com/users/?limit=15&skip=0';
+  const limit = 15;
+  const url = 'https://dummyjson.com/users'; // ?limit=15&skip=0
 
   const userInfo = ref<{
     rows: any[];
@@ -17,14 +18,18 @@
     isSuccess: boolean;
   }>({ rows: [], isLoading: true, isSuccess: false, isError: false })
 
-  const handlePageChange = (page: number) => {
-    console.log(page)
+  const page = ref(0)
+
+  const handlePageChange = (currentPage: number) => {
+    page.value = (currentPage)
   }
 
-  const fetchUsers = () => {
+  const fetchUsers = ({limit, offset}: {limit: number, offset: number}) => {
     userInfo.value.isLoading = true;
 
-    fetch(url)
+    const urlWithParams = `${url}/?limit=${limit}&skip=${offset}`
+
+    fetch(urlWithParams)
         .then((response) => {
           return response.json()
         })
@@ -47,7 +52,13 @@
   }
 
   onMounted(() => {
-    fetchUsers()
+    fetchUsers({limit, offset: 0})
+  })
+
+  watch(page, (prev, current) => {
+    if (prev !== current) {
+      fetchUsers({limit, offset: page.value * limit})
+    }
   })
 
   const headers = [
