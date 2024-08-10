@@ -19,11 +19,18 @@
       </tbody>
     </table>
     <div v-if="hasFooter" class="table-footer">
-      <div>Page {{page + 1}}</div>
-      <div class="table-pagination">
-        <button :disabled="page === 0" @click="decreasePage"> < </button>
-        <button @click="increasePage"> > </button>
+      <div class="table-footer-side">
+        <div>Page {{page + 1}}</div>
+        <div v-if="isLoading">Loading...</div>
       </div>
+
+      <div class="table-footer-side">
+        <div class="table-pagination">
+          <button :disabled="page === 0 || isLoading" @click="decreasePage"> < </button>
+          <button :disabled="isLoading"  @click="increasePage"> > </button>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -39,6 +46,7 @@ import {ref, VNode, watch} from "vue";
       label: VNode | string;
     }[]
     hasFooter?: boolean
+    isLoading?: boolean
   }>()
 
   const emit = defineEmits(['page-change'])
@@ -63,7 +71,7 @@ import {ref, VNode, watch} from "vue";
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   .table-container {
     display: grid;
   }
@@ -111,6 +119,11 @@ import {ref, VNode, watch} from "vue";
     display: flex;
     align-items: center;
     justify-content: space-between;
+    &-side {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
   }
   .table-pagination { }
 </style>

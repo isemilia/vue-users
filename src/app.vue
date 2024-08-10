@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <Table :rows="userInfo.rows" :headers="headers" :hasFooter="true" @page-change="handlePageChange"/>
+    <Table :rows="userInfo.rows" :isLoading="userInfo.isLoading" :headers="headers" :hasFooter="true" @page-change="handlePageChange"/>
   </div>
 </template>
 
