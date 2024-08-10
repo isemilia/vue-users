@@ -1,7 +1,7 @@
 <template>
   <div class="table-container">
     <table class="table-root">
-      <thead>
+      <thead class="table-head">
       <tr>
         <th v-for="header in props.headers">
           <component v-if="isVNode(header.label)" :is="header.label" />
@@ -9,7 +9,7 @@
         </th>
       </tr>
       </thead>
-      <tbody>
+      <tbody class="table-body">
       <tr v-for="row in props.rows">
         <td v-for="header in props.headers">
           <component v-if="isVNode(row[header.name])" :is="row[header.name]"/>
@@ -75,22 +75,22 @@ import {ref, VNode, watch} from "vue";
     grid-auto-rows: auto;
     max-height: 85vh;
   }
-  thead, tbody {
+  .table-head, .table-body {
     display: grid;
     grid-auto-rows: auto;
   }
-  .table-footer, thead {
+  .table-footer, .table-head {
     position: sticky;
     z-index: 10;
     background: #f8f8f8;
   }
-  thead {
+  .table-head {
     top: 0;
   }
   .table-footer {
     bottom: 0;
   }
-  tbody {
+  .table-body {
     height: 100%;
     overflow: auto;
   }
