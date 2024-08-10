@@ -73,7 +73,7 @@
     max-width: 700px;
     margin: 0 auto;
     display: grid;
-    place-content: center;
+    align-items: center;
     height: 100vh;
   }
 </style>
