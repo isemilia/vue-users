@@ -65,14 +65,39 @@ import {ref, VNode, watch} from "vue";
 
 <style scoped>
   .table-container {
-    max-height: 100%;
+    display: grid;
   }
   .table-root {
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
+    display: grid;
+    grid-auto-rows: auto;
+    max-height: 85vh;
+  }
+  thead, tbody {
+    display: grid;
+    grid-auto-rows: auto;
+  }
+  .table-footer, thead {
+    position: sticky;
+    z-index: 10;
+    background: #f8f8f8;
+  }
+  thead {
+    top: 0;
+  }
+  .table-footer {
+    bottom: 0;
+  }
+  tbody {
     height: 100%;
     overflow: auto;
+  }
+  tr {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
   }
   th {
     text-align: left;
