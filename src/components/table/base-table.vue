@@ -3,7 +3,7 @@
     <table class="table-root">
       <thead class="table-head">
       <tr>
-        <th v-for="header in props.headers">
+        <th v-for="header in props.headers" class="table-column">
           <component v-if="isVNode(header.label)" :is="header.label" />
           <span v-else>{{header.label}}</span>
         </th>
@@ -11,7 +11,7 @@
       </thead>
       <tbody class="table-body">
       <tr v-for="row in props.rows">
-        <td v-for="header in props.headers">
+        <td v-for="header in props.headers" class="table-cell">
           <component v-if="isVNode(row[header.name])" :is="row[header.name]"/>
           <span v-else>{{row[header.name]}}</span>
         </td>
@@ -72,8 +72,15 @@ import {ref, VNode, watch} from "vue";
 </script>
 
 <style scoped lang="scss">
+
   .table-container {
+    --border-color: #ffe2c1;
+    --nav-bg-color: #fffbf6;
+
     display: grid;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
   }
   .table-root {
     width: 100%;
@@ -90,7 +97,7 @@ import {ref, VNode, watch} from "vue";
   .table-footer, .table-head {
     position: sticky;
     z-index: 10;
-    background: #f8f8f8;
+    background: var(--nav-bg-color);
   }
   .table-head {
     top: 0;
@@ -111,11 +118,13 @@ import {ref, VNode, watch} from "vue";
     text-align: left;
   }
   td, th {
-    border-bottom: 1px solid #000;
-    padding: 6px 10px;
+    padding: 10px 14px;
+  }
+  td {
+    border-bottom: 1px solid var(--border-color);
   }
   .table-footer {
-    padding: 10px 10px;
+    padding: 10px 14px;
     display: flex;
     align-items: center;
     justify-content: space-between;

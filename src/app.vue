@@ -34,7 +34,7 @@
           return response.json()
         })
         .then((data) => {
-          console.log(data)
+          // console.log(data)
           userInfo.value.rows = data.users.map(user => ({
             id: user.id,
             name: user.firstName,
@@ -67,7 +67,7 @@
         ...row,
         name: (
           <div style={{
-            background: row.gender === 'male' ? 'lightblue' : 'lightpink',
+            background: row.gender === 'male' ? '#d3f2ff' : '#ffe4ea',
             display: 'inline-block',
             padding: '2px 16px',
             borderRadius: '16px'
