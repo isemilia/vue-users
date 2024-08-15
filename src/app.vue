@@ -1,12 +1,12 @@
 <template>
   <div class="main">
-    <Table :rows="userInfo.rows" :isLoading="userInfo.isLoading" :headers="headers" :hasFooter="true" @page-change="handlePageChange"/>
+    <Table :rows="formattedRows" :isLoading="userInfo.isLoading" :headers="headers" :hasFooter="true" @page-change="handlePageChange"/>
   </div>
 </template>
 
 <script lang="tsx" setup>
   import Table from "./components/table/base-table.vue";
-  import {onMounted, ref, watch} from "vue";
+  import {computed, onMounted, ref, watch} from "vue";
 
   const limit = 15;
   const url = 'https://dummyjson.com/users'; // ?limit=15&skip=0
@@ -34,11 +34,12 @@
           return response.json()
         })
         .then((data) => {
-          // console.log(data)
+          console.log(data)
           userInfo.value.rows = data.users.map(user => ({
             id: user.id,
             name: user.firstName,
-            email: user.email,
+            username: user.username,
+            gender: user.gender
           }))
           userInfo.value.isSuccess = true
         })
@@ -61,16 +62,30 @@
     }
   })
 
+  const formattedRows = computed(() =>
+      userInfo.value.rows.map((row) => ({
+        ...row,
+        name: (
+          <div style={{
+            background: row.gender === 'male' ? 'lightblue' : 'lightpink',
+            display: 'inline-block',
+            padding: '2px 16px',
+            borderRadius: '16px'
+          }}>{row.name}</div>
+        ),
+      }))
+  );
+
   const headers = [
     {name: 'name', label: 'Client'},
-    {name: 'email', label: 'Email'},
+    {name: 'username', label: 'Username'},
   ]
 </script>
 
 <style scoped lang="scss">
   .main {
     width: 100%;
-    max-width: 700px;
+    max-width: 800px;
     margin: 0 auto;
     display: grid;
     align-items: center;
