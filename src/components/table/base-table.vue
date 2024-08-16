@@ -106,6 +106,7 @@
     position: sticky;
     z-index: 10;
     background: var(--nav-bg-color);
+    padding-right: 5px;
   }
   .table-head {
     top: 0;
@@ -116,6 +117,21 @@
   .table-body {
     height: 100%;
     overflow: auto;
+    &::-webkit-scrollbar-track
+    {
+      border-radius: 10px;
+      background-color: #fafafa;
+    }
+    &::-webkit-scrollbar
+    {
+      width: 5px;
+      background-color: #fafafa;
+    }
+    &::-webkit-scrollbar-thumb
+    {
+      border-radius: 10px;
+      background-color: #ffe2c1;
+    }
   }
   tr {
     display: grid;

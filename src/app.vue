@@ -66,12 +66,17 @@
       userInfo.value.rows.map((row) => ({
         ...row,
         name: (
-          <div style={{
-            background: row.gender === 'male' ? '#d3f2ff' : '#ffe4ea',
-            display: 'inline-block',
-            padding: '2px 16px',
-            borderRadius: '16px'
-          }}>{row.name}</div>
+            <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+              <div style={{
+                marginTop: '2px',
+                background: row.gender === 'male' ? '#d3f2ff' : '#ffe4ea',
+                borderRadius: '16px',
+                width: '16px',
+                height: '16px',
+              }}></div>
+              {row.name}
+            </div>
+
         ),
       }))
   );
