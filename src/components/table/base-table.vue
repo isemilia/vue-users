@@ -20,14 +20,21 @@
     </table>
     <div v-if="hasFooter" class="table-footer">
       <div class="table-footer-side">
-        <div>Page {{page + 1}}</div>
+        <div class="table-page">
+          Page
+          {{page + 1}}
+        </div>
         <div v-if="isLoading">Loading...</div>
       </div>
 
       <div class="table-footer-side">
         <div class="table-pagination">
-          <button :disabled="page === 0 || isLoading" @click="decreasePage"> < </button>
-          <button :disabled="isLoading"  @click="increasePage"> > </button>
+          <button :disabled="page === 0 || isLoading" @click="decreasePage" class="table-pagination-button">
+            <img :src="arrowLeft" alt="previous page"/>
+          </button>
+          <button :disabled="isLoading"  @click="increasePage" class="table-pagination-button">
+            <img :src="arrowRight" alt="next page"/>
+          </button>
         </div>
       </div>
 
@@ -36,8 +43,11 @@
 </template>
 
 <script lang="ts" setup>
-import {ref, VNode, watch} from "vue";
+  import { ref, VNode, watch } from "vue";
   import isVNode from "../../utils/functions/isVNode";
+  import arrowRight from './icons/right-arrow.png';
+  import arrowLeft from './icons/left-arrow.png';
+  import pageIcon from './icons/page.png';
 
   const props = defineProps<{
     rows: any[];
@@ -72,7 +82,6 @@ import {ref, VNode, watch} from "vue";
 </script>
 
 <style scoped lang="scss">
-
   .table-container {
     --border-color: #ffe2c1;
     --nav-bg-color: #fffbf6;
@@ -134,5 +143,27 @@ import {ref, VNode, watch} from "vue";
       gap: 10px;
     }
   }
-  .table-pagination { }
+  .table-pagination {
+    display: flex;
+    gap: 8px;
+    &-button {
+      width: 18px;
+      height: 18px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: opacity .3s;
+      &:disabled {
+        cursor: auto;
+        opacity: .4;
+      }
+      img {
+        height: 100%;
+        max-width: 100%;
+      }
+    }
+  }
 </style>
