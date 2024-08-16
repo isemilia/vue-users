@@ -47,7 +47,6 @@
   import isVNode from "../../utils/functions/isVNode";
   import arrowRight from './icons/right-arrow.png';
   import arrowLeft from './icons/left-arrow.png';
-  import pageIcon from './icons/page.png';
 
   const props = defineProps<{
     rows: any[];
