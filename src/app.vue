@@ -4,9 +4,10 @@
   </div>
 </template>
 
-<script lang="tsx" setup>
+<script lang="ts" setup>
   import Table from "./components/table/base-table.vue";
-  import {computed, onMounted, ref, watch} from "vue";
+  import {computed, h, onMounted, ref, watch} from "vue";
+  import UserLabel from "./components/user-label/user-label.vue";
 
   const limit = 15;
   const url = 'https://dummyjson.com/users'; // ?limit=15&skip=0
@@ -65,19 +66,7 @@
   const formattedRows = computed(() =>
       userInfo.value.rows.map((row) => ({
         ...row,
-        name: (
-            <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
-              <div style={{
-                marginTop: '2px',
-                background: row.gender === 'male' ? '#d3f2ff' : '#ffe4ea',
-                borderRadius: '16px',
-                width: '16px',
-                height: '16px',
-              }}></div>
-              {row.name}
-            </div>
-
-        ),
+        name: h(UserLabel, {label: row.name, gender: row.gender}),
       }))
   );
 
