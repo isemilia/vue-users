@@ -37,7 +37,7 @@
         })
         .then((data) => {
           console.log(data)
-          userInfo.value.rows = data.users.map(user => ({
+          userInfo.value.rows = data.users.map((user: any) => ({
             id: user.id,
             name: user.firstName,
             username: user.username,
