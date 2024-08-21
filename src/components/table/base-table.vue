@@ -86,9 +86,12 @@
     --nav-bg-color: #fffbf6;
 
     display: grid;
+    align-content: space-between;
     border: 1px solid var(--border-color);
     border-radius: 16px;
     overflow: hidden;
+    height: 100%;
+    max-height: 70vh;
   }
   .table-root {
     width: 100%;
@@ -96,7 +99,7 @@
     border-collapse: collapse;
     display: grid;
     grid-auto-rows: auto;
-    max-height: 85vh;
+    max-height: 70vh;
   }
   .table-head, .table-body {
     display: grid;
