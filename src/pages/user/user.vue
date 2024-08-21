@@ -5,7 +5,7 @@
     </div>
     <div>
       <h1 class="title">{{user.name}} {{user.lastName}}</h1>
-      <div>{{user.birthDate.day}}.{{user.birthDate.month}}.{{user.birthDate.year}}</div>
+      <div>{{user.birthDate.day}}.{{user.birthDate.month}}.{{user.birthDate.year}}, {{user.age}} years old</div>
       <div>{{user.phone}}</div>
       <div>{{user.email}}</div>
     </div>
@@ -26,6 +26,7 @@
     lastName: string;
     email: string;
     phone: string;
+    age: number;
     birthDate: {
       day: string;
       month: string;
@@ -45,6 +46,7 @@
           user.value = {
             name: data.firstName,
             lastName: data.lastName,
+            age: data.age,
             img: data.image,
             email: data.email,
             phone: data.phone,
