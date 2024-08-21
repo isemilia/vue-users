@@ -8,6 +8,7 @@
   import Table from "./components/table/base-table.vue";
   import {computed, h, onMounted, ref, watch} from "vue";
   import UserLabel from "./components/user-label/user-label.vue";
+  import PhoneDropdown from "./components/phone-dropdown/phone-dropdown.vue";
 
   const limit = 15;
   const url = 'https://dummyjson.com/users'; // ?limit=15&skip=0
@@ -35,11 +36,12 @@
           return response.json()
         })
         .then((data) => {
-          // console.log(data)
+          console.log(data)
           userInfo.value.rows = data.users.map(user => ({
             id: user.id,
             name: user.firstName,
             username: user.username,
+            phone: user.phone,
             gender: user.gender
           }))
           userInfo.value.isSuccess = true
@@ -67,12 +69,14 @@
       userInfo.value.rows.map((row) => ({
         ...row,
         name: h(UserLabel, {label: row.name, gender: row.gender}),
+        phone: h(PhoneDropdown, {phone: row.phone}),
       }))
   );
 
   const headers = [
     {name: 'name', label: 'Client'},
     {name: 'username', label: 'Username'},
+    {name: 'phone', label: 'Phone'},
   ]
 </script>
 

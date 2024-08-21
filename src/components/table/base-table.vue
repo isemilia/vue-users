@@ -86,12 +86,9 @@
 
 <style scoped lang="scss">
   .table-container {
-    --border-color: #ffe2c1;
-    --nav-bg-color: #fffbf6;
-
     display: grid;
     align-content: space-between;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--beige-dark);
     border-radius: 16px;
     overflow: hidden;
     height: 100%;
@@ -121,7 +118,7 @@
   .table-footer, .table-head {
     position: sticky;
     z-index: 10;
-    background: var(--nav-bg-color);
+    background: var(--beige-light);
     padding-right: 5px;
   }
   .table-head {
@@ -161,7 +158,7 @@
     padding: 10px 14px;
   }
   td {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--beige-dark);
   }
   .table-footer {
     padding: 10px 14px;
