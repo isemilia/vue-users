@@ -1,7 +1,7 @@
 <template>
   <div class="user">
     <span class="user-gender" :class="props.gender || 'unspecified'"></span>
-    <span class="user-label">{{props.label}}</span>
+    <RouterLink :to="`/users/${props.id}`" class="user-label">{{props.label}}</RouterLink>
   </div>
 </template>
 
@@ -9,6 +9,7 @@
   const props = defineProps<{
     gender?: 'male' | 'female';
     label: string;
+    id: number
   }>()
 </script>
 
@@ -17,6 +18,10 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  &-label {
+    color: inherit;
+    cursor: pointer;
+  }
   &-gender {
     margin-top: 2px;
     background: #ccc;
