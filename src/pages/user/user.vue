@@ -35,7 +35,7 @@
     img: string;
   } | null>(null)
 
-  const fetchUser = ({id}) => {
+  const fetchUser = ({ id }: { id: number }) => {
     fetch(`${url}/${id}`)
         .then(res => res.json())
         .then(data => {
@@ -61,7 +61,7 @@
 
   watch(
     () => route.params.id,
-    (newId, oldId) => {
+    (newId) => {
       fetchUser({id: newId})
     }
   )
