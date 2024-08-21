@@ -1,5 +1,8 @@
 <template>
   <div class="table-container">
+    <div v-if="props.isLoading" class="table-progress">
+      <ProgressIndicator/>
+    </div>
     <table class="table-root">
       <thead class="table-head">
       <tr>
@@ -10,7 +13,7 @@
       </tr>
       </thead>
       <tbody class="table-body">
-      <tr v-for="row in props.rows">
+      <tr v-if="!isLoading" v-for="row in props.rows">
         <td v-for="header in props.headers" class="table-cell">
           <component v-if="isVNode(row[header.name])" :is="row[header.name]"/>
           <span v-else>{{row[header.name]}}</span>
@@ -24,15 +27,15 @@
           Page
           {{page + 1}}
         </div>
-        <div v-if="isLoading">Loading...</div>
+        <div v-if="props.isLoading">Loading...</div>
       </div>
 
       <div class="table-footer-side">
         <div class="table-pagination">
-          <button :disabled="page === 0 || isLoading" @click="decreasePage" class="table-pagination-button">
+          <button :disabled="page === 0 || props.isLoading" @click="decreasePage" class="table-pagination-button">
             <img :src="arrowLeft" alt="previous page"/>
           </button>
-          <button :disabled="isLoading"  @click="increasePage" class="table-pagination-button">
+          <button :disabled="props.isLoading"  @click="increasePage" class="table-pagination-button">
             <img :src="arrowRight" alt="next page"/>
           </button>
         </div>
@@ -47,6 +50,7 @@
   import isVNode from "../../utils/functions/isVNode";
   import arrowRight from './icons/right-arrow.png';
   import arrowLeft from './icons/left-arrow.png';
+  import ProgressIndicator from "../progress-indicator/progress-indicator.vue";
 
   const props = defineProps<{
     rows: any[];
@@ -92,6 +96,15 @@
     overflow: hidden;
     height: 100%;
     max-height: 70vh;
+
+    position: relative;
+  }
+  .table-progress {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
   }
   .table-root {
     width: 100%;
