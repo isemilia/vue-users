@@ -62,13 +62,13 @@
   watch(
     () => route.params.id,
     (newId) => {
-      fetchUser({id: newId})
+      fetchUser({ id: +newId })
     }
   )
 
   onMounted(() => {
     if (route.params.id) {
-      fetchUser({id: route.params.id});
+      fetchUser({ id: +route.params.id });
     }
   });
 
